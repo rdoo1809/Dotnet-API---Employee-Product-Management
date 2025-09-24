@@ -4,10 +4,11 @@ namespace Assignment1_PROG3340.Data;
 
 public class AppDbContext : DbContext
 {
-    private readonly IHostEnvironment _env;
+    private readonly IWebHostEnvironment? _env;
     
-    public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+    public AppDbContext(DbContextOptions<AppDbContext> options, IWebHostEnvironment? env = null) : base(options)
     {
+        _env = env;
     }
     
     public DbSet<Product> Employees { get; set; } = null!;
@@ -15,7 +16,10 @@ public class AppDbContext : DbContext
          
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        if (_env.IsDevelopment())
+        base.OnModelCreating(modelBuilder);
+        bool isDevelopment = _env?.IsDevelopment() ?? true;
+        
+        if (isDevelopment)
         {
             modelBuilder.Entity<Employee>().HasData(
                 new Employee { Id = 1, Name = "Dev Alice", Department = "Produce" },
