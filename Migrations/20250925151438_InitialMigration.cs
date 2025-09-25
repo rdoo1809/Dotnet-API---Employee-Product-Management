@@ -13,7 +13,7 @@ namespace Assignment1_PROG3340.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Employee",
+                name: "Employees",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -23,11 +23,11 @@ namespace Assignment1_PROG3340.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Employee", x => x.Id);
+                    table.PrimaryKey("PK_Employees", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
@@ -37,11 +37,11 @@ namespace Assignment1_PROG3340.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                 });
 
             migrationBuilder.InsertData(
-                table: "Employee",
+                table: "Employees",
                 columns: new[] { "Id", "Department", "Name" },
                 values: new object[,]
                 {
@@ -50,7 +50,7 @@ namespace Assignment1_PROG3340.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Product",
+                table: "Products",
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
@@ -63,10 +63,10 @@ namespace Assignment1_PROG3340.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Employee");
+                name: "Employees");
 
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "Products");
         }
     }
 }

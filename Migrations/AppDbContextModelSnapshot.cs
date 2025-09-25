@@ -32,7 +32,7 @@ namespace Assignment1_PROG3340.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
@@ -64,7 +64,7 @@ namespace Assignment1_PROG3340.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new

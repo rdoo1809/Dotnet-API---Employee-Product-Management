@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Assignment1_PROG3340.Data;
 using Assignment1_PROG3340.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment1_PROG3340
 {
@@ -22,14 +24,23 @@ namespace Assignment1_PROG3340
         [HttpGet]
         public ActionResult<IEnumerable<Employee>> GetEmployees()
         {
-            var employees = new List<Employee>
-            {
-                new Employee { Id = 1, Name = "Test Alice", Department = "Tester" },
-                new Employee { Id = 2, Name = "Test Bob", Department = "Developer" }
-            };
+            // var employees = new List<Employee>
+            // {
+            //     new Employee { Id = 1, Name = "Test Alice", Department = "Tester" },
+            //     new Employee { Id = 2, Name = "Test Bob", Department = "Developer" }
+            // };
 
-            return Ok(employees);
-            // return await _context.Employees.ToListAsync();
+            Console.WriteLine($"DB Path: {Path.GetFullPath("app.db")}");
+            return Ok(_context.Employees.ToList());
+        }
+        
+        // GET: /api/employees/{id}
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Employee>> GetEmployee(int id)
+        {
+            var employee = await _context.Employees.FindAsync(id);
+            if (employee == null) return NotFound();
+            return employee;
         }
     }
 }

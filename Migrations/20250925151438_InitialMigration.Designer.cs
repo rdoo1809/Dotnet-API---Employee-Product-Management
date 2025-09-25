@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment1_PROG3340.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250924210546_InitialMigration")]
+    [Migration("20250925151438_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -35,7 +35,7 @@ namespace Assignment1_PROG3340.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Employees");
 
                     b.HasData(
                         new
@@ -67,7 +67,7 @@ namespace Assignment1_PROG3340.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
 
                     b.HasData(
                         new
