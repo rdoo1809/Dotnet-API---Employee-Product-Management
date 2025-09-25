@@ -11,7 +11,6 @@ builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
 {
     var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
     options.UseSqlite("Data Source=app.db");
-    // options.UseInternalServiceProvider(serviceProvider);
 });
 
 var app = builder.Build();
@@ -30,6 +29,8 @@ app.UseRouting();
 app.UseAuthorization();
 
 app.MapStaticAssets();
+
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",

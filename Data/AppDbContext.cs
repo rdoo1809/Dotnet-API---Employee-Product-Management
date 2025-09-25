@@ -11,7 +11,7 @@ public class AppDbContext : DbContext
         _env = env;
     }
     
-    public DbSet<Product> Employees { get; set; } = null!;
+    public DbSet<Employee> Employees { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
          
     protected override void OnModelCreating(ModelBuilder modelBuilder)
