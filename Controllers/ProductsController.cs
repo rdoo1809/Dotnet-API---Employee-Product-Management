@@ -1,4 +1,5 @@
 ﻿using Assignment1_PROG3340.Data;
+using Assignment1_PROG3340.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,25 +9,25 @@ namespace Assignment1_PROG3340
     [ApiController]
     public class ProductsController: ControllerBase
     {
-        private readonly AppDbContext _context;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ProductsController(AppDbContext context)
+        public ProductsController(IUnitOfWork unitOfWork)
         {
-            _context = context;
+            _unitOfWork = unitOfWork;
         }
 
         // GET /api/products
         [HttpGet]
         public ActionResult<IEnumerable<Product>> GetProducts()
         {
-            return Ok(_context.Products.ToList());
+            return Ok(_unitOfWork.Products.GetAll());
         }
 
         // GET: /api/products/{id}
         [HttpGet("{id}")]
         public ActionResult<Product> GetProduct(int id)
         {
-            var product = _context.Products.Find(id);
+            var product = _unitOfWork.Products.GetById(id);
             if (product == null) return NotFound();
             return product;
         }
@@ -36,8 +37,8 @@ namespace Assignment1_PROG3340
         public ActionResult<Product> Product(Product product)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            _unitOfWork.Products.Add(product);
+            _unitOfWork.Complete();
             return CreatedAtAction(nameof(GetProduct), new { id = product.Id }, product);
         }
 
@@ -46,8 +47,8 @@ namespace Assignment1_PROG3340
         public ActionResult<Product> UpdateProduct(int id, Product product)
         {
             if (id != product.Id) return BadRequest();
-            _context.Entry(product).State = EntityState.Modified;
-            _context.SaveChanges();
+            _unitOfWork.Products.Update(product);
+            _unitOfWork.Complete();
             return Ok(product);
         }
 
@@ -55,10 +56,10 @@ namespace Assignment1_PROG3340
         [HttpDelete("{id}")]
         public ActionResult<Product> DeleteProduct(int id)
         {
-            var product = _context.Products.Find(id);
+            var product = _unitOfWork.Products.GetById(id);
             if (product == null) return NotFound();
-            _context.Products.Remove(product);
-            _context.SaveChanges();
+            _unitOfWork.Products.Delete(product);
+            _unitOfWork.Complete();
             return product;
         }
     }
