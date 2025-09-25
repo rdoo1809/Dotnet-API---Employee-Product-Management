@@ -1,4 +1,5 @@
 using Assignment1_PROG3340.Data;
+using Assignment1_PROG3340.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,7 +7,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//register dbcontext with env
+// register unit of work for di
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
+
+// register dbcontext with env
 builder.Services.AddDbContext<AppDbContext>((serviceProvider, options) =>
 {
     var env = serviceProvider.GetRequiredService<IWebHostEnvironment>();
