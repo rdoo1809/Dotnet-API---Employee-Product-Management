@@ -1,7 +1,5 @@
-﻿using Assignment1_PROG3340.Data;
-using Assignment1_PROG3340.Repositories;
+﻿using Assignment1_PROG3340.Repositories;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Assignment1_PROG3340
 {

@@ -1,11 +1,11 @@
-﻿using Assignment1_PROG3340.Data;
-using Assignment1_PROG3340.Repositories;
+﻿using Assignment1_PROG3340.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Assignment1_PROG3340
 {
     [Route("api/[controller]")]
     [ApiController]
+    
     public class EmployeesController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
