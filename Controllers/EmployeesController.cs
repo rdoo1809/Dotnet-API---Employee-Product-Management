@@ -1,14 +1,9 @@
 ﻿using Assignment1_PROG3340.Data;
 using Microsoft.AspNetCore.Mvc;
-using Assignment1_PROG3340.Data;
-using Assignment1_PROG3340.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 namespace Assignment1_PROG3340
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
